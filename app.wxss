@@ -9,3 +9,35 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.ui-flex{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.ui-flex-center{
+   -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.ui-flex-hor-center{
+   -webkit-justify-content: center;
+    justify-content: center;
+}
+.ui-flex-ver-center{
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.ui-p20{
+  padding: 20rpx;
+}
+.ui-pt20{
+  padding-top: 20rpx;
+}
+.ui-mt20{
+  margin-top: 20rpx;
+}

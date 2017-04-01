@@ -1,11 +1,13 @@
 {
   "pages":[
+     "pages/record-expend/record-expend",
     "pages/index/index",
     "pages/mine/mine"
+   
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#10AEFF",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
   },

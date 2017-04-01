@@ -1,5 +1,16 @@
 
-
-.usermotto {
-  margin-top: 200px;
+.text-expend{
+  color: grey;
+  font-size: 28rpx;
+  text-align: center;
+}
+.text-today-expend-num{
+  color: #10AEFF;
+  font-size: 34rpx;
+  text-align: center;
+}
+.text-month-expend-num{
+  color: #e64340;
+  font-size: 34rpx;
+  text-align: center;
 }

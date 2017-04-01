@@ -3,16 +3,16 @@
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {}
-  },
-  //事件处理函数
-  bindViewTap: function() {
+   todayExpend:"100",
+    monthExpend:"1100",
    
   },
+  //事件处理函数
+  recodeExpend: function() {
+   wx.navigateTo({
+     url: '../../pages/record-expend/record-expend',
+   })
+  },
   onLoad: function () {
-  this.setData({
-    userInfo:app.globalData.userInfo
-  });
   }
 })
