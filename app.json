@@ -1,7 +1,8 @@
 {
   "pages":[
-     "pages/record-expend/record-expend",
+   
     "pages/index/index",
+     "pages/record-expend/record-expend",
     "pages/mine/mine"
    
   ],
@@ -23,5 +24,6 @@
       "selectedIconPath":"img/mine_p.jpg",
       "text": "我的"
     }]
-  }
+  },
+  "debug": true
 }

@@ -1,15 +1,20 @@
 
 <!--index.wxml-->
-<view >
+<view>
   <view class="ui-flex  ui-p20">
-    <text>今日</text><text class="text-expend">总支出：</text>
+    <text>今日</text>
+    <text class="text-expend">总支出：</text>
     <text class="text-today-expend-num">￥{{todayExpend}}</text>
   </view>
-
-   <view class="ui-flex  ui-p20">
-     <text>本月</text><text class="text-expend">总支出：</text>
+  <view class="ui-flex  ui-p20">
+    <text>本月</text>
+    <text class="text-expend">总支出：</text>
     <text class="text-month-expend-num">￥{{monthExpend}}</text>
   </view>
-
-<button class="ui-mt20" type="primary" bindtap="recodeExpend">我又花钱了</button>
+   <view class="ui-flex  ui-p20">
+    <text>本年</text>
+    <text class="text-expend">总支出：</text>
+    <text class="text-year-expend-num">￥{{monthExpend}}</text>
+  </view>
+  <button class="blue-button ui-mt20" hover-class="blue-button-p" bindtap="recodeExpend">我又花钱了</button>
 </view>
