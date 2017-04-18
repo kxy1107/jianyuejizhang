@@ -84,6 +84,12 @@ function formatTime(date, format) {
     case "MM.dd":
       return month + "." + day;
       break;
+    case "yyyy-MM":
+      return year + "-" + month;
+      break;
+    case "yyyy":
+      return year;
+      break;
     case "hh:mm:ss":
       return [hour, minute, second].map(formatNumber).join(':');
       break;
@@ -125,6 +131,9 @@ function formatTime(date, format) {
 
 }
 
+
+
+
 function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -141,13 +150,61 @@ function formatToDate(dateString) {
 }
 
 /**
+ * 判断时间是否相同
+ */
+function dateIsDifference(startDate, endDate, dateType) {
+  //转化为一个格式
+
+  switch (dateType) {
+    case "day":
+    case "d"://同一天
+      let startDay = formatTime(new Date(startDate), "yyyy-MM-dd");
+      let endDay = formatTime(new Date(endDate), "yyyy-MM-dd");
+      if (startDay == endDay) {
+        return true;
+        break;
+      } else {
+        return false;
+        break;
+      };
+    case "month":
+    case "n"://同一月
+      let startMonth = formatTime(new Date(startDate), "yyyy-MM");
+      let endMonth = formatTime(new Date(endDate), "yyyy-MM");
+      if (startMonth == endMonth) {
+        return true;
+        break;
+      } else {
+        return false;
+        break;
+      };
+    case "year":
+    case "y"://同一年
+      let startYear = formatTime(new Date(startDate), "yyyy");
+      let endYear = formatTime(new Date(endDate), "yyyy");
+      if (startYear == endYear) {
+        return true;
+        break;
+      } else {
+        return false;
+        break;
+      };
+    default:
+      return false;
+
+  }
+
+}
+
+
+/**
  * 求时间差
  */
 function timeDifference(startDate, endDate, dateType) {
 
   var date3 = new Date(endDate).getTime() - new Date(startDate).getTime();   //时间差的毫秒数
   //计算出相差天数 
-  var days = Math.floor(date3 / (24 * 3600 * 1000))
+  var days = Math.floor(date3 / (24 * 3600 * 1000));
   var hours = (date3 / (3600 * 1000)).toFixed(1);
   var minutes = Math.floor(date3 / (60 * 1000));
   var seconds = Math.round(date3 / 1000);
@@ -198,6 +255,7 @@ module.exports = {
   formatToDate: formatToDate,
   timeDifference: timeDifference,
   json2Form: json2Form,
+  dateIsDifference: dateIsDifference,
 
 }
 

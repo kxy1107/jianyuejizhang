@@ -44,8 +44,10 @@ Page({
     ],
     date: "",//日期
     selectName: "饮食",//选择的消费方式
+    selectImg: "../../img/food_p.png",
     isShowCaculator: true,//是否显示计算器（隐藏为空）
     spendMoney: "0.00",
+    remarksText: "",
     caculatorEnd: true,//计算完毕，重新开始
     todayDate: "",
 
@@ -63,6 +65,7 @@ Page({
     this.setData({
       consumpPatternsList: list,
       selectName: list[index].name,
+      selectImg: list[index].iconSel,
     });
   },
   //选择时间
@@ -85,78 +88,137 @@ Page({
 
   },
 
-confirmData:function(){
-  wx.navigateBack({
-    delta: 1
-  })
-},
+  //备注输入框
+  onInputRemarks: function (e) {
+    var text = e.detail.value;
+    this.setData({
+      remarksText: text,
+    });
+    if (this.data.isShowCaculator) {
+      hiddenCaculator();
+    }
+  },
+
+  //完成记录
+  confirmData: function () {
+
+
+    //未计算结果
+    if (!this.data.caculatorEnd) {
+      this.caculatorResult();
+    }
+    if (parseFloat(this.data.spendMoney) == 0) {
+      wx.showToast({
+        title: '请输入花费金额',
+        duration: 2000
+      });
+      return;
+    }
+
+    let value = [];
+
+    try {
+      value = wx.getStorageSync('Bill')
+    } catch (e) {
+
+    }
+
+    if (value == "") {
+      value = [];
+    }
+
+    let json =
+      {
+        date: this.data.date,
+        spendMoney: this.data.spendMoney,
+        remarks: this.data.remarksText,
+        spendWay: this.data.selectName,
+        spendWayImg: this.data.selectImg,
+      }
+      ;
+
+    value.push(json);
+
+    try {
+      wx.setStorageSync('Bill', value)
+    } catch (e) {
+    }
+    wx.showToast({
+      title: '记账成功',
+      icon: 'success',
+      duration: 500,
+      success: function () {
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 500)
+
+      }
+    });
+
+
+  },
 
 
   ////////计算器相关
   touchNum: function (e) {
-   
+
     var text = e.currentTarget.dataset.num;
     var num = "";
-    if(text == "+"){
-       this.setData({
-      caculatorEnd:false,
-    });
+    if (text == "+") {
+      this.setData({
+        caculatorEnd: false,
+      });
     }
-    if(parseFloat(this.data.spendMoney) != 0){
+    if (parseFloat(this.data.spendMoney) != 0) {
       num = this.data.spendMoney;
-       if(this.data.caculatorEnd){
-      num = "";
-    }
+      if (this.data.caculatorEnd) {
+        num = "";
+      }
     }
     num = num + text;
     this.setData({
-      spendMoney: num,
-      caculatorEnd:false,
+      spendMoney: num == 0 ? "0.00" : num,
+      caculatorEnd: false,
     });
   },
-//删除一个字符
-  touchClear:function(){
-  
-     if(parseFloat(this.data.spendMoney) != 0){
-       var text = this.data.spendMoney;
-      text = text.substring(0,text.length-1);
+  //删除一个字符
+  touchClear: function () {
+
+    if (parseFloat(this.data.spendMoney) != 0) {
+      var text = this.data.spendMoney;
+      text = text.substring(0, text.length - 1);
 
       this.setData({
-      spendMoney: text == 0 ? "0.00":text,
-    });
+        spendMoney: text == 0 ? "0.00" : text,
+      });
     }
   },
 
   //计算结果
-  touchResult:function(){
-     if(parseFloat(this.data.spendMoney) != 0){
-     var result = this.data.spendMoney;
-     var strResult = result.split("+");
-     var sum = 0;
-     strResult.forEach(function(num){
-       sum +=parseFloat(num == "" ? 0:num) 
-     });
-      this.setData({
-      spendMoney: sum == 0 ? "0.00":sum,
-      caculatorEnd:true,
-    });
+  touchResult: function () {
+    this.caculatorResult();
 
-     }
-    
   },
 
-onShareAppMessage: function () {
-    return {
-      title: '记账',
-      path: 'pages/record-expend/record-expend',
-      success: function(res) {
-        // 分享成功
-      },
-      fail: function(res) {
-        // 分享失败
-      }
+
+  caculatorResult: function () {
+    if (parseFloat(this.data.spendMoney) != 0) {
+      var result = this.data.spendMoney;
+      var strResult = result.split("+");
+      var sum = 0;
+      strResult.forEach(function (num) {
+        sum += parseFloat(num == "" ? 0 : num)
+      });
+      this.setData({
+        spendMoney: sum == 0 ? "0.00" : sum,
+        caculatorEnd: true,
+      });
     }
   },
+
+
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
   },

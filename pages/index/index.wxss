@@ -1,4 +1,9 @@
-
+page{
+  background-color: #ddd;
+}
+.content-view{
+  background-color: white;
+}
 .text-expend{
   color: grey;
   font-size: 28rpx;
@@ -18,4 +23,16 @@
   color: goldenrod;
   font-size: 34rpx;
   text-align: center;
+}
+.today-bill{
+  color: #10AEFF;
+}
+.spend-way-icon{
+  width: 64rpx;
+  height: 64rpx;
+}
+.item-remarks{
+  flex: 1;
+  text-overflow: ellipsis;
+  padding-left: 10rpx;
 }

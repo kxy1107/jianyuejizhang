@@ -3,7 +3,8 @@
 var app = getApp()
 Page({
   data: {
-    userInfo: {}
+    userInfo: {},
+  
   },
   //事件处理函数
   bindViewTap: function() {

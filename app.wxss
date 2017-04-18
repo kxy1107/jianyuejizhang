@@ -40,6 +40,9 @@
   -webkit-align-items: center;
   align-items: center;
 }
+.ui-flex-1{
+flex:1;
+}
 
 .ui-p10{
   padding: 10rpx;
@@ -51,7 +54,12 @@
 .ui-pt20 {
   padding-top: 20rpx;
 }
-
+.ui-m10 {
+  margin: 10rpx;
+}
+.ui-m20 {
+  margin: 20rpx;
+}
 .ui-mt20 {
   margin-top: 20rpx;
 }
