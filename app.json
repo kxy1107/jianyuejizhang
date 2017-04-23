@@ -1,15 +1,16 @@
 {
   "pages":[
-   
+     "pages/history-bill/history-bill",
     "pages/index/index",
      "pages/record-expend/record-expend",
+   
     "pages/mine/mine"
    
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#10AEFF",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "首页",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

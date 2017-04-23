@@ -21,6 +21,10 @@ onTodayBillItemClick:function(e){
   let index = e.currentTarget.dataset.index;
   
 },
+//今日账单item长按
+ononTodayBillLongItemClick:function(e){
+
+},
 
   onLoad: function () {
 

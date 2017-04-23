@@ -19,10 +19,12 @@
   <view class=" ui-p20">
     <button class="blue-button" hover-class="blue-button-p" bindtap="recodeExpend">我又花钱了</button>
   </view>
-<view class="today-bill">
-今日账单
-</view>
-
+  <view class=" ui-p20">
+    <button class="blue-button" hover-class="blue-button-p" bindtap="">查看历史账单</button>
+  </view>
+  <view class="today-bill">
+    今日账单
+  </view>
   <view wx:for="{{todayRecord}}" catchlongtap="onTodayBillItemClick" catchlongtap="ononTodayBillLongItemClick" data-index="{{index}}">
     <view class="line"></view>
     <view class="ui-flex ui-p20">
