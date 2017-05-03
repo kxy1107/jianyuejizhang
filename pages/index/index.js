@@ -26,6 +26,7 @@ ononTodayBillLongItemClick:function(e){
 
 },
 
+
   onLoad: function () {
 
   },

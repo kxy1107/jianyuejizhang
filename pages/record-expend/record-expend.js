@@ -161,6 +161,42 @@ Page({
   },
 
 
+  addRecordBill: function () {
+    let data = {
+      date: this.data.date,
+      spendMoney: this.data.spendMoney,
+      remarks: this.data.remarksText,
+      spendWay: this.data.selectName,
+      spendWayImg: this.data.selectImg,
+    };
+    let url = getApp().globalData.address + "/addRecordBill";
+    util.HttpGet(url, data, function (res) {
+      if (res.Code == 1) {
+        wx.showToast({
+          title: '记账成功',
+          icon: 'success',
+          duration: 500,
+          success: function () {
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 500)
+          }
+        });
+
+      }else{
+         wx.showToast({
+          title: '记账失败',
+          icon: 'success',
+          duration: 500,
+        });
+      }
+    });
+
+  },
+
+
   ////////计算器相关
   touchNum: function (e) {
 

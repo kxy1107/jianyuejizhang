@@ -15,18 +15,21 @@ App({
             grant_type: "authorization_code",
           }
           util.HttpGet(loginUrl, dataInfo, function (response) {
-            try {
                 wx.setStorageSync('openid', response.openid);
-            } catch (e) {    
-            }
+                let URL = that.globalData.address + "/login";
+                let loginData = {
+                  UserNo:response.openid,
+                  UserImg:that.globalData.userInfo.avatarUrl,
+                  UserName:that.globalData.userInfo.nickName,
+                };
+              util.HttpGet(URL, loginData, function (res) {
+                if(res.Code == 1){
+
+                }
+              });
+
           });
-          //获取基础信息
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res);
-              that.globalData.userInfo = res.userInfo
-            }
-          })
+        
         }
       })
     
@@ -34,10 +37,19 @@ App({
 
 
   onLaunch: function () {
-   this.getUserInfo();
+    let that = this;
+      //获取基础信息
+          wx.getUserInfo({
+            success: function (res) {
+              that.globalData.userInfo = res.userInfo;
+               that.getUserInfo();
+            }
+          })
+  
   },
  
   globalData:{
-    userInfo:null
+    userInfo:null,
+    address:"http://127.0.0.1:8012"
   }
 })
