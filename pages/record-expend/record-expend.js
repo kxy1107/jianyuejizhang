@@ -160,7 +160,7 @@ Page({
 
   },
 
-
+//保存账单到服务
   addRecordBill: function () {
     let data = {
       date: this.data.date,
