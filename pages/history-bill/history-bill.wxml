@@ -1,7 +1,8 @@
 
 <!--pages/history-bill/history-bill.wxml-->
 <view class="ui-height-100">
-<!--顶部查询时间选择-->
+
+  <!--顶部查询时间选择-->
   <view class="date-select">
     <view class="ui-flex-1">开始时间:</view>
     <picker class="ui-flex-1" mode="date" value="{{startdDate}}" start="2015-09-01" end="endDate" bindchange="bindDateChange">
@@ -17,6 +18,11 @@
     </picker>
   </view>
   <view class="line"></view>
+  <view>
+    <text>总花费金额:</text>
+    <text class="picker-date">{{totalMoney}}</text>
+  </view>
+  <view class="line"></view>
   <!--上方文字标题-->
   <view class="history-bill-table-title">
     <view class="ui-flex-1">日期</view>
@@ -24,6 +30,8 @@
     <view class="ui-flex-1">主要用途</view>
   </view>
   <view class="line"></view>
+
+
   <!--账单列表-->
   <scroll-view scroll-y="true" class="ui-height-100" bindscrolltoupper="upper" bindscrolltolower="lower">
     <block wx:for="{{historyBillList}}">

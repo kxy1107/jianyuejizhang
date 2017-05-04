@@ -5,7 +5,7 @@ App({
     var that = this
     //调用登录接口
     wx.login({
-      success: function (LoginRes) {
+      success: function (Res) {
         wx.getUserInfo({
           success: function (res) {
             that.globalData.userInfo = res.userInfo;
@@ -19,14 +19,16 @@ App({
 
   //获取openID
   getOpenID: function (res) {
-    var loginUrl = "https://api.weixin.qq.com/sns/jscode2session?";
+    var that = this;
+    var loginUrl = "https://api.weixin.qq.com/sns/jscode2session";
     var dataInfo = {
       appid: "wx12e0d9958c5b3bb6",
       secret: "30356ac2c536e99bbfe1ad2cd2a40963",
-      js_code: LoginRes.code,
+      js_code: res.code,
       grant_type: "authorization_code",
     }
     util.HttpGet(loginUrl, dataInfo, function (response) {
+      that.globalData.openID = response.openid;
       ////调用自己的登陆接口
       let URL = that.globalData.address + "/login";
       let loginData = {
@@ -58,6 +60,7 @@ App({
 
   globalData: {
     userInfo: null,
-    address: "http://127.0.0.1:8012"
+    address: "http://127.0.0.1:8012",
+    openID:"",
   }
 })

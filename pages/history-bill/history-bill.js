@@ -4,6 +4,7 @@ Page({
     startdDate:"2017-04-23",
     endDate:"2017-04-23",
     today:"2017-04-23",
+    totalMoney:10020,
     historyBillList:[
       {
         date:"2017-04-01",

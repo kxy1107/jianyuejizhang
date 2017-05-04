@@ -41,7 +41,9 @@ Page({
         isSelect: false,
         iconSel: "../../img/other_p.png",
       },
+      
     ],
+    billNo:"",
     date: "",//日期
     selectName: "饮食",//选择的消费方式
     selectImg: "../../img/food_p.png",
@@ -160,14 +162,27 @@ Page({
 
   },
 
+
+  //获取消费方式
+  getSpendWayList:function(){
+     let data = {
+      UserNo:getApp().globalData.openID,
+    };
+    let url = getApp().globalData.address + "/getSpendWayList";
+    util.HttpGet(url, data, function (res) {
+
+    })
+  },
+
 //保存账单到服务
   addRecordBill: function () {
     let data = {
-      date: this.data.date,
-      spendMoney: this.data.spendMoney,
-      remarks: this.data.remarksText,
-      spendWay: this.data.selectName,
-      spendWayImg: this.data.selectImg,
+      UserNo:getApp().globalData.openID,
+      Date: this.data.date,
+      SpendMoney: this.data.spendMoney,
+      Remarks: this.data.remarksText,
+      SpendWay: this.data.selectName,
+      SpendWayImg: this.data.selectImg,
     };
     let url = getApp().globalData.address + "/addRecordBill";
     util.HttpGet(url, data, function (res) {
@@ -257,6 +272,9 @@ Page({
 
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
+    this.setData({
+      billNo:options.billID
+    });
   },
   onReady: function () {
     // 页面渲染完成
