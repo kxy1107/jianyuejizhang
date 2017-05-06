@@ -25,12 +25,12 @@
   <view class="today-bill">
     今日账单
   </view>
-  <view wx:for="{{todayRecord}}" catchlongtap="onTodayBillItemClick" catchlongtap="ononTodayBillLongItemClick" data-index="{{index}}">
+  <view wx:for="{{todayRecord}}" >
     <view class="line"></view>
-    <view class="ui-flex ui-p20">
-      <image class="spend-way-icon" src="{{item.spendWayImg}}"></image>
-      <text class="item-remarks">{{item.remarks}}</text>
-      <text>{{item.spendMoney}}</text>
+    <view class="ui-flex ui-p20" catchtap="onTodayBillItemClick" catchlongtap="ononTodayBillLongItemClick" data-id="{{item.BillNo}}">
+      <image class="spend-way-icon" src="{{item.PurposeIcon}}"></image>
+      <text class="item-remarks">{{item.Purpose}}</text>
+      <text>{{item.SpendMoney}}</text>
     </view>
   </view>
 </view>

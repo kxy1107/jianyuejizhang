@@ -4,46 +4,8 @@ var util = require('../../utils/util.js')
 Page({
 
   data: {
-    consumpPatternsList: [
-      {
-        icon: "../../img/food_d.png",
-        name: "饮食",
-        isSelect: true,
-        iconSel: "../../img/food_p.png"
-      },
-      {
-        icon: "../../img/traffic_d.png",
-        name: "交通",
-        isSelect: false,
-        iconSel: "../../img/traffic_p.png"
-      },
-      {
-        icon: "../../img/taobao_d.png",
-        name: "淘宝",
-        isSelect: false,
-        iconSel: "../../img/taobao_p.png",
-      },
-      {
-        icon: "../../img/entertainment_d.png",
-        name: "娱乐",
-        isSelect: false,
-        iconSel: "../../img/entertainment_p.png",
-      },
-      {
-        icon: "../../img/rent_d.png",
-        name: "房租",
-        isSelect: false,
-        iconSel: "../../img/rent_p.png",
-      },
-      {
-        icon: "../../img/other_d.png",
-        name: "其他",
-        isSelect: false,
-        iconSel: "../../img/other_p.png",
-      },
-      
-    ],
-    billNo:"",
+    consumpPatternsList: [],
+    billNo: "",
     date: "",//日期
     selectName: "饮食",//选择的消费方式
     selectImg: "../../img/food_p.png",
@@ -61,13 +23,13 @@ Page({
     var list = this.data.consumpPatternsList;
 
     for (var key of list) {
-      key.isSelect = false;
+      key.IsSelect = false;
     }
-    list[index].isSelect = true;
+    list[index].IsSelect = true;
     this.setData({
       consumpPatternsList: list,
-      selectName: list[index].name,
-      selectImg: list[index].iconSel,
+      selectName: list[index].Name,
+      selectImg: list[index].IconSel,
     });
   },
   //选择时间
@@ -116,68 +78,73 @@ Page({
       });
       return;
     }
-
-    let value = [];
-
-    try {
-      value = wx.getStorageSync('Bill')
-    } catch (e) {
-
-    }
-
-    if (value == "") {
-      value = [];
-    }
-
-    let json =
-      {
-        date: this.data.date,
-        spendMoney: this.data.spendMoney,
-        remarks: this.data.remarksText,
-        spendWay: this.data.selectName,
-        spendWayImg: this.data.selectImg,
-      }
-      ;
-
-    value.push(json);
-
-    try {
-      wx.setStorageSync('Bill', value)
-    } catch (e) {
-    }
-    wx.showToast({
-      title: '记账成功',
-      icon: 'success',
-      duration: 500,
-      success: function () {
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 500)
-
-      }
-    });
-
+    this.addRecordBill();
 
   },
 
 
   //获取消费方式
-  getSpendWayList:function(){
-     let data = {
-      UserNo:getApp().globalData.openID,
+  getSpendWayList: function () {
+    let that = this;
+    let openID = wx.getStorageSync('openID');
+    let data = {
+      UserNo: openID,
     };
     let url = getApp().globalData.address + "/getSpendWayList";
     util.HttpGet(url, data, function (res) {
-
+      if (res.Code == 1) {
+        that.setData({
+          consumpPatternsList: res.SpendWayList
+        });
+        that.getBillDetailInfo();
+      }
     })
   },
 
-//保存账单到服务
-  addRecordBill: function () {
+  //获取消费详情
+  getBillDetailInfo: function () {
+    let that = this;
+    if(that.data.billNo == ""){
+      return;
+    }
+
+    let openID = wx.getStorageSync('openID');
     let data = {
-      UserNo:getApp().globalData.openID,
+      UserNo: openID,
+      BillNo: that.data.billNo,
+    };
+    let url = getApp().globalData.address + "/getBillDetailInfo";
+    util.HttpGet(url, data, function (res) {
+      if (res.Code == 1) {
+        let list = that.data.consumpPatternsList;
+        for (var key of list) {
+          if (key.Name == res.BillInfo[0]["Purpose"]) {
+            key.IsSelect = true;
+          } else {
+            key.IsSelect = false;
+          }
+        }
+
+
+        that.setData({
+          consumpPatternsList: list,
+          date: res.BillInfo[0]["BillDate"],
+          spendMoney: res.BillInfo[0]["SpendMoney"],
+          remarksText: res.BillInfo[0]["Remark"],
+          selectName: res.BillInfo[0]["Purpose"],
+          selectImg: res.BillInfo[0]["PurposeIcon"],
+        });
+      }
+    })
+  },
+
+
+  //保存账单到服务
+  addRecordBill: function () {
+    let openID = wx.getStorageSync('openID');
+    let data = {
+      UserNo: openID,
+      BillNo: this.data.billNo,
       Date: this.data.date,
       SpendMoney: this.data.spendMoney,
       Remarks: this.data.remarksText,
@@ -200,8 +167,8 @@ Page({
           }
         });
 
-      }else{
-         wx.showToast({
+      } else {
+        wx.showToast({
           title: '记账失败',
           icon: 'success',
           duration: 500,
@@ -273,15 +240,17 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.setData({
-      billNo:options.billID
+      billNo: options.billID
     });
   },
   onReady: function () {
-    // 页面渲染完成
-    this.setData({
+     this.setData({
       date: util.formatTime(new Date(), "yyyy-MM-dd"),
       todayDate: util.formatTime(new Date(), "yyyy-MM-dd"),
     });
+    this.getSpendWayList();
+    // 页面渲染完成
+   
   },
   onShow: function () {
     // 页面显示

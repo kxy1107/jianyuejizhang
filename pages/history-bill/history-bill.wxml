@@ -5,13 +5,13 @@
   <!--顶部查询时间选择-->
   <view class="date-select">
     <view class="ui-flex-1">开始时间:</view>
-    <picker class="ui-flex-1" mode="date" value="{{startdDate}}" start="2015-09-01" end="endDate" bindchange="bindDateChange">
+    <picker class="ui-flex-1" mode="date" value="{{startDate}}" start="2015-09-01" end="endDate" bindchange="startDateChange">
       <view class="picker-date">
-        {{startdDate}}
+        {{startDate}}
       </view>
     </picker>
     <view class="ui-flex-1">结束时间:</view>
-    <picker class="ui-flex-1" mode="date" value="{{startdDate}}" start="startdDate" end="today" bindchange="bindDateChange">
+    <picker class="ui-flex-1" mode="date" value="{{startDate}}" start="startdDate" end="today" bindchange="endDateChange">
       <view class="picker-date">
         {{endDate}}
       </view>
@@ -35,10 +35,10 @@
   <!--账单列表-->
   <scroll-view scroll-y="true" class="ui-height-100" bindscrolltoupper="upper" bindscrolltolower="lower">
     <block wx:for="{{historyBillList}}">
-      <view class="history-bill-list ">
-        <view class="ui-flex-1">{{item.date}}</view>
-        <view class="ui-flex-1">{{item.money}}</view>
-        <view class="ui-flex-1">{{item.user}}</view>
+      <view class="history-bill-list " catchtap="onItemClick" data-id = "{{item.BillNo}}">
+        <view class="ui-flex-1">{{item.Date}}</view>
+        <view class="ui-flex-1">{{item.SpendMoney}}</view>
+        <view class="ui-flex-1">{{item.Purpose}}</view>
       </view>
     </block>
   </scroll-view>

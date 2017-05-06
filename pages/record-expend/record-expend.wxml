@@ -7,8 +7,8 @@
   <view class="select-consumption-patterns ui-pt20">
     <view class="consumption-patterns-item" wx:for="{{consumpPatternsList}}">
       <view class=" ui-flex-ver ui-flex-center ui-p10" data-index="{{index}}" bindtap="onConsumptionItemClick">
-        <image class="consumption-patterns-item-icon" src="{{item.isSelect ? item.iconSel : item.icon}}"></image>
-        <text>{{item.name}}</text>
+        <image class="consumption-patterns-item-icon" src="{{item.IsSelect ? item.IconSel : item.Icon}}"></image>
+        <text>{{item.Name}}</text>
       </view>
     </view>
   </view>

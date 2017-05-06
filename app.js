@@ -9,7 +9,7 @@ App({
         wx.getUserInfo({
           success: function (res) {
             that.globalData.userInfo = res.userInfo;
-            that.getOpenID(res);
+            that.getOpenID(Res.code,res);
           }
         })
       }
@@ -18,17 +18,17 @@ App({
   },
 
   //获取openID
-  getOpenID: function (res) {
+  getOpenID: function (code,res) {
     var that = this;
     var loginUrl = "https://api.weixin.qq.com/sns/jscode2session";
     var dataInfo = {
       appid: "wx12e0d9958c5b3bb6",
       secret: "30356ac2c536e99bbfe1ad2cd2a40963",
-      js_code: res.code,
+      js_code:code,
       grant_type: "authorization_code",
     }
     util.HttpGet(loginUrl, dataInfo, function (response) {
-      that.globalData.openID = response.openid;
+       wx.setStorageSync('openID', response.openid);
       ////调用自己的登陆接口
       let URL = that.globalData.address + "/login";
       let loginData = {
@@ -48,14 +48,11 @@ App({
 
 
   onLaunch: function () {
-    //获取基础信息
-    this.getUserInfo();
-
-
+  this.getUserInfo();
   },
   onReady: function () {
     // 页面渲染完成
-
+    
   },
 
   globalData: {
