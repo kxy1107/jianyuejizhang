@@ -26,9 +26,9 @@ Page({
     this.getHistoryBillList();
   },
 
-//点击列表查看消费详情
-  onItemClick:function(e){
-     let billNo = e.currentTarget.dataset.id;
+  //点击列表查看消费详情
+  onItemClick: function (e) {
+    let billNo = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '../../pages/record-expend/record-expend?billID=' + billNo,
     })
@@ -52,27 +52,25 @@ Page({
           totalMoney: res.TotalMoney,
           historyBillList: res.HistoryBillList,
         });
-
       }
-
-
     })
   },
 
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-
+ this.setData({
+        startDate: util.formatTime(new Date(), "yyyy-MM-dd"),
+        endDate: util.formatTime(new Date(), "yyyy-MM-dd"),
+        today: util.formatTime(new Date(), "yyyy-MM-dd"),
+      });
   },
   onReady: function () {
-    this.setData({
-      startDate: util.formatTime(new Date(), "yyyy-MM-dd"),
-      endDate: util.formatTime(new Date(), "yyyy-MM-dd"),
-      today: util.formatTime(new Date(), "yyyy-MM-dd"),
-    });
+
     // 页面渲染完成
 
   },
   onShow: function () {
+  
     // 页面显示
     this.getHistoryBillList();
   },

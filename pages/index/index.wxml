@@ -29,7 +29,8 @@
     <view class="line"></view>
     <view class="ui-flex ui-p20" catchtap="onTodayBillItemClick" catchlongtap="ononTodayBillLongItemClick" data-id="{{item.BillNo}}">
       <image class="spend-way-icon" src="{{item.PurposeIcon}}"></image>
-      <text class="item-remarks">{{item.Purpose}}</text>
+      <text class="ui-pl20 ui-pr20">{{item.Purpose}}</text>
+       <text class="item-remarks">{{item.Remark}}</text>
       <text>{{item.SpendMoney}}</text>
     </view>
   </view>

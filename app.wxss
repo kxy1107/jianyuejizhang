@@ -54,6 +54,12 @@ flex:1;
 .ui-pt20 {
   padding-top: 20rpx;
 }
+.ui-pl20 {
+  padding-left: 20rpx;
+}
+.ui-pr20 {
+  padding-right: 20rpx;
+}
 .ui-m10 {
   margin: 10rpx;
 }
