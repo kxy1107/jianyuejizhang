@@ -35,5 +35,4 @@ page{
   flex: 1;
   text-overflow: ellipsis;
   padding-left: 10rpx;
-  text-align: center;
 }

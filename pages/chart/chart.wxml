@@ -1,0 +1,4 @@
+<!--pages/chart/chart.wxml-->
+<view >
+    <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler"></canvas>
+</view>

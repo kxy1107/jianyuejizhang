@@ -4,6 +4,7 @@
     "pages/index/index",
      "pages/record-expend/record-expend",
     "pages/history-bill/history-bill",
+    "pages/chart/chart",
     "pages/mine/mine"
    
   ],
@@ -16,14 +17,22 @@
   "tabBar": {
     "list": [{
       "pagePath": "pages/index/index",
-       "iconPath":"img/home.jpg",
-      "selectedIconPath":"img/home_p.jpg",
-      "text": "首页"
+       "iconPath":"img/home.png",
+      "selectedIconPath":"img/home_p.png",
+      "text": "首页",
+      "selectedColor": "#1296db"
     }, {
+      "pagePath": "pages/chart/chart",
+       "iconPath":"img/chart.png",
+      "selectedIconPath":"img/chart_p.png",
+      "text": "图表",
+      "selectedColor": "#1296db"
+    },{
       "pagePath": "pages/mine/mine",
-      "iconPath":"img/mine.jpg",
-      "selectedIconPath":"img/mine_p.jpg",
-      "text": "我的"
+      "iconPath":"img/mine.png",
+      "selectedIconPath":"img/mine_p.png",
+      "text": "我的",
+       "selectedColor": "#1296db"
     }]
   }
  
