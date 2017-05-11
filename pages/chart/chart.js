@@ -75,7 +75,7 @@ Page({
         name: '每月总支出',
         data: money,
         format: function (val, name) {
-          return val.toFixed(2) + '元';
+          return val.toFixed(1);
         }
       }],
       xAxis: {
@@ -84,7 +84,7 @@ Page({
       yAxis: {
         title: '花费金额 (元)',
         format: function (val) {
-          return val.toFixed(2);
+          return val.toFixed(1);
         },
         min: 0
       },
@@ -98,6 +98,23 @@ Page({
   },
 
   onLoad: function (e) {
-   this.getChartsData();
+  
+  },
+
+
+  onShareAppMessage: function () {
+    return {
+      title: '最近一年账单',
+      path: 'pages/chart/chart',
+      success: function (res) {
+        // 分享成功
+      },
+      fail: function (res) {
+        // 分享失败
+      }
+    }
+  },
+  onShow:function(){
+    this.getChartsData();
   }
 });

@@ -58,7 +58,7 @@ App({
   globalData: {
     userInfo: null,
     // address: "http://123.206.191.67:8012",
-    address: "http://127.0.0.1:8012",
+    address: "https://jianyuejizhang.xyz",
     openID:"",
   }
 })

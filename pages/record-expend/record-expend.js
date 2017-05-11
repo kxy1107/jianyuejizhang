@@ -59,7 +59,7 @@ Page({
       remarksText: text,
     });
     if (this.data.isShowCaculator) {
-      hiddenCaculator();
+      this.hiddenCaculator();
     }
   },
 
@@ -223,7 +223,7 @@ Page({
 
   caculatorResult: function () {
     if (parseFloat(this.data.spendMoney) != 0) {
-      var result = this.data.spendMoney;
+      var result = this.data.spendMoney + "";
       var strResult = result.split("+");
       var sum = 0;
       strResult.forEach(function (num) {
@@ -233,6 +233,7 @@ Page({
         spendMoney: sum == 0 ? "0.00" : sum,
         caculatorEnd: true,
       });
+      this.hiddenCaculator();
     }
   },
 
