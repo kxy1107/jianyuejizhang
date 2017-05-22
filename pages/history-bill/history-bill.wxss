@@ -38,4 +38,17 @@ page{
 
 
 }
+.spend-way-icon{
+  width: 64rpx;
+  height: 64rpx;
+}
+.item-remarks{
+  flex: 1;
+  text-overflow: ellipsis;
+  padding-left: 10rpx;
+  white-space:nowrap; 
+  box-sizing: border-box;
+  max-width: 130rpx;
+  overflow: hidden;
+}
 

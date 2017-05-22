@@ -1,5 +1,7 @@
 // pages/history-bill/history-bill.js
 var util = require('../../utils/util.js')
+var touchStartTime = 0;
+var touchEndTime = 0;
 Page({
   data: {
     startDate: "",
@@ -26,11 +28,50 @@ Page({
     this.getHistoryBillList();
   },
 
-//点击列表查看消费详情
-  onItemClick:function(e){
-     let billNo = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '../../pages/record-expend/record-expend?billID=' + billNo,
+
+
+
+  onTouchStart: function (e) {
+    touchStartTime = e.timeStamp;
+  },
+
+  onTouchEnd: function (e) {
+    touchEndTime = e.timeStamp;
+  },
+
+  //今日账单item点击
+  onHisterBillItemClick: function (e) {
+    let that = this;
+    let billNo = e.currentTarget.dataset.id;
+    if (touchEndTime - touchStartTime > 500) {
+      wx.showModal({
+        title: '提示',
+        content: '确认删除本条账单记录！！！',
+        success: function (res) {
+          if (res.confirm) {
+            that.delRecordBill(billNo);
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../pages/record-expend/record-expend?billID=' + billNo,
+      })
+    }
+  },
+
+  delRecordBill: function (BillNo) {
+    let that = this;
+    let openID = wx.getStorageSync('openID');
+    let url = app.globalData.address + "/delRecordBill";
+    let data = {
+      UserNo: openID,
+      BillNo: BillNo
+    }
+    util.HttpGet(url, data, function (res) {
+      if (res.Code == 1) {
+        that.getTodayBill();
+      }
     })
   },
 
@@ -64,16 +105,17 @@ Page({
 
   },
   onReady: function () {
-    this.setData({
-      startDate: util.formatTime(new Date(), "yyyy-MM-dd"),
-      endDate: util.formatTime(new Date(), "yyyy-MM-dd"),
-      today: util.formatTime(new Date(), "yyyy-MM-dd"),
-    });
+   
     // 页面渲染完成
 
   },
   onShow: function () {
     // 页面显示
+    this.setData({
+      startDate: util.formatTime(new Date(), "yyyy-MM-dd"),
+      endDate: util.formatTime(new Date(), "yyyy-MM-dd"),
+      today: util.formatTime(new Date(), "yyyy-MM-dd"),
+    });
     this.getHistoryBillList();
   },
   onHide: function () {

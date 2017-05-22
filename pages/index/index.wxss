@@ -35,4 +35,7 @@ page{
   flex: 1;
   text-overflow: ellipsis;
   padding-left: 10rpx;
+  white-space:nowrap; 
+  box-sizing: border-box;
+  overflow: hidden;
 }

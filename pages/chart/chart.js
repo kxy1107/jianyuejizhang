@@ -105,7 +105,7 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '最近一年账单',
-      path: 'pages/chart/chart',
+      path: 'pages/index/index',
       success: function (res) {
         // 分享成功
       },

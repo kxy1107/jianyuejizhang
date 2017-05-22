@@ -35,10 +35,13 @@
   <!--账单列表-->
   <scroll-view scroll-y="true" class="ui-height-100" bindscrolltoupper="upper" bindscrolltolower="lower">
     <block wx:for="{{historyBillList}}">
-      <view class="history-bill-list " catchtap="onItemClick" data-id = "{{item.BillNo}}">
+      <view class="history-bill-list " bindtap="onHisterBillItemClick"  data-id="{{item.BillNo}}"  bindtouchstart="onTouchStart" bindtouchend = "onTouchEnd" >
         <view class="ui-flex-1">{{item.Date}}</view>
-        <view class="ui-flex-1">{{item.SpendMoney}}</view>
-        <view class="ui-flex-1">{{item.Purpose}}</view>
+        <view class="ui-flex-1">￥{{item.SpendMoney}}</view>
+        <view class="ui-flex-1 ui-flex ui-flex-center ">
+         <image class="spend-way-icon" src="{{item.PurposeIcon}}"></image>
+         <text class="item-remarks">{{item.Remark}}</text>
+           </view>
       </view>
     </block>
   </scroll-view>

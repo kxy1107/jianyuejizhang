@@ -52,29 +52,29 @@
   <view class="calculator" >
     <view class="calculator-number">
       <view class="calculator-number-item">
-        <view hover hover-class="number-hover" class="number" data-num = "1" catchtap="touchNum">1</view>
-        <view hover hover-class="number-hover" class="number" data-num = "2"  catchtap="touchNum">2</view>
-        <view hover hover-class="number-hover" class="number" data-num = "3"  catchtap="touchNum">3</view>
+        <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "1" catchtap="touchNum">1</view>
+        <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "2"  catchtap="touchNum">2</view>
+        <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "3"  catchtap="touchNum">3</view>
       </view>
        <view class="calculator-number-item">
-      <view hover hover-class="number-hover" class="number" data-num = "4"  catchtap="touchNum">4</view>
-      <view hover hover-class="number-hover" class="number" data-num = "5"  catchtap="touchNum">5</view>
-      <view hover hover-class="number-hover" class="number" data-num = "6"  catchtap="touchNum">6</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "4"  catchtap="touchNum">4</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "5"  catchtap="touchNum">5</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "6"  catchtap="touchNum">6</view>
        </view>
        <view class="calculator-number-item">
-      <view hover hover-class="number-hover" class="number" data-num = "7"  catchtap="touchNum">7</view>
-      <view hover hover-class="number-hover" class="number" data-num = "8"  catchtap="touchNum">8</view>
-      <view hover hover-class="number-hover" class="number" data-num = "9"  catchtap="touchNum">9</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "7"  catchtap="touchNum">7</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "8"  catchtap="touchNum">8</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "9"  catchtap="touchNum">9</view>
        </view>
        <view class="calculator-number-item">
-      <view hover hover-class="number-hover" class="number" data-num = "."  catchtap="touchNum">.</view>
-      <view hover hover-class="number-hover" class="number" data-num = "0"  catchtap="touchNum">0</view>
-      <view hover hover-class="number-hover" class="number" catchtap="touchClear">←</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "."  catchtap="touchNum">.</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" data-num = "0"  catchtap="touchNum">0</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="number" catchtap="touchClear">←</view>
       </view>
     </view>
     <view class="calculator-operator">
-      <view hover hover-class="number-hover" class="operator" data-num = "+"  catchtap="touchNum">+</view>
-      <view hover hover-class="number-hover" class="operator" catchtap="touchResult">完成</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="operator" data-num = "+"  catchtap="touchNum">+</view>
+      <view hover hover-class="number-hover" hover-stay-time = "50" class="operator" catchtap="touchResult">完成</view>
     </view>
   </view>
   </block>

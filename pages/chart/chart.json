@@ -1,1 +1,6 @@
-{}
+{
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#10AEFF",
+      "navigationBarTitleText": "图表",
+      "navigationBarTextStyle": "black"
+}

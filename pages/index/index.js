@@ -1,7 +1,9 @@
 //index.js
 //获取应用实例
 var util = require('../../utils/util.js')
-var app = getApp()
+var app = getApp();
+var touchStartTime = 0;
+var touchEndTime = 0;
 Page({
   data: {
     todayExpend: "0",
@@ -26,27 +28,38 @@ Page({
 
   //今日账单item点击
   onTodayBillItemClick: function (e) {
-    let billNo = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '../../pages/record-expend/record-expend?billID=' + billNo,
-    })
-
-  },
-  //今日账单item长按
-  ononTodayBillLongItemClick: function (e) {
     let that = this;
     let billNo = e.currentTarget.dataset.id;
-    wx.showModal({
-  title: '提示',
-  content: '确认删除本条账单记录！！！',
-  success: function(res) {
-    if (res.confirm) {
-     that.delRecordBill(billNo);
-    } 
-  }
-})
+    if (touchEndTime - touchStartTime > 500) {
+      wx.showModal({
+        title: '提示',
+        content: '确认删除本条账单记录！！！',
+        success: function (res) {
+          if (res.confirm) {
+            that.delRecordBill(billNo);
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../pages/record-expend/record-expend?billID=' + billNo,
+      })
+    }
+
+
 
   },
+
+
+
+  onTouchStart: function (e) {
+    touchStartTime = e.timeStamp;
+  },
+
+  onTouchEnd: function (e) {
+    touchEndTime = e.timeStamp;
+  },
+
 
   //获取首页信息
   getTodayBill: function () {
@@ -71,13 +84,13 @@ Page({
     })
   },
 
-  delRecordBill:function(BillNo){
+  delRecordBill: function (BillNo) {
     let that = this;
     let openID = wx.getStorageSync('openID');
     let url = app.globalData.address + "/delRecordBill";
     let data = {
       UserNo: openID,
-      BillNo:BillNo
+      BillNo: BillNo
     }
     util.HttpGet(url, data, function (res) {
       if (res.Code == 1) {
@@ -103,7 +116,7 @@ Page({
         success: function (Res) {
           wx.getUserInfo({
             success: function (resGetUserInfo) {
-              that.globalData.userInfo = resGetUserInfo.userInfo;
+              app.globalData.userInfo = resGetUserInfo.userInfo;
               var loginUrl = "https://api.weixin.qq.com/sns/jscode2session";
               var dataInfo = {
                 appid: "wx12e0d9958c5b3bb6",
@@ -114,7 +127,7 @@ Page({
               util.HttpGet(loginUrl, dataInfo, function (response) {
                 wx.setStorageSync('openID', response.openid);
                 ////调用自己的登陆接口
-                let URL = address + "/login";
+                let URL = app.globalData.address + "/login";
                 let loginData = {
                   UserNo: response.openid,
                   UserImg: resGetUserInfo.userInfo.avatarUrl,
@@ -128,6 +141,23 @@ Page({
 
               });
 
+            },
+            fail: function () {
+              wx.showModal({
+                title: '提示',
+                content: '拒绝授权，无法使用本产品，重新授权',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      success: (res) => {
+                        that.onShow();
+                      }
+                    })
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
+              })
             }
           })
         }
