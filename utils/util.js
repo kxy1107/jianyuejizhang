@@ -131,6 +131,11 @@ function formatTime(date, format) {
 
 }
 
+function addDay(AddDayCount) {
+  var dd = new Date();
+  dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期   
+  return dd;
+}   
 
 
 
@@ -252,6 +257,7 @@ module.exports = {
   HttpGet: HttpGet,
   HttpPost: HttpPost,
   formatTime: formatTime,
+  addDay: addDay,
   formatToDate: formatToDate,
   timeDifference: timeDifference,
   json2Form: json2Form,

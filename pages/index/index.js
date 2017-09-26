@@ -4,6 +4,7 @@ var util = require('../../utils/util.js')
 var app = getApp();
 var touchStartTime = 0;
 var touchEndTime = 0;
+var canClick = true;
 Page({
   data: {
     todayExpend: "0",
@@ -17,6 +18,7 @@ Page({
     wx.navigateTo({
       url: '../../pages/record-expend/record-expend?billID=',
     })
+
   },
 
   //点击查看历史账单
@@ -112,56 +114,11 @@ Page({
       that.getTodayBill();
     } else {
       //调用登录接口
-      wx.login({
-        success: function (Res) {
-          wx.getUserInfo({
-            success: function (resGetUserInfo) {
-              app.globalData.userInfo = resGetUserInfo.userInfo;
-              var loginUrl = "https://api.weixin.qq.com/sns/jscode2session";
-              var dataInfo = {
-                appid: "wx12e0d9958c5b3bb6",
-                secret: "30356ac2c536e99bbfe1ad2cd2a40963",
-                js_code: Res.code,
-                grant_type: "authorization_code",
-              }
-              util.HttpGet(loginUrl, dataInfo, function (response) {
-                wx.setStorageSync('openID', response.openid);
-                ////调用自己的登陆接口
-                let URL = app.globalData.address + "/login";
-                let loginData = {
-                  UserNo: response.openid,
-                  UserImg: resGetUserInfo.userInfo.avatarUrl,
-                  UserName: resGetUserInfo.userInfo.nickName,
-                };
-                util.HttpGet(URL, loginData, function (res) {
-                  if (res.Code == 1) {
-                    that.getTodayBill();
-                  }
-                });
-
-              });
-
-            },
-            fail: function () {
-              wx.showModal({
-                title: '提示',
-                content: '拒绝授权，无法使用本产品，重新授权',
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.openSetting({
-                      success: (res) => {
-                        that.onShow();
-                      }
-                    })
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
-                  }
-                }
-              })
-            }
-          })
+      app.getUserInfo(function (res) {
+        if (res) {
+          that.getTodayBill();
         }
-      })
+      });
     }
 
   },

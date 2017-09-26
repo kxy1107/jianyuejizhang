@@ -7,7 +7,7 @@ page{
   display: -webkit-flex;
   display: flex;
   font-size: 28rpx;
-  padding: 10rpx;
+  padding: 20rpx;
 }
 
 .picker-date {
@@ -20,6 +20,7 @@ page{
   display: flex;
   color: #10aeff;
   text-align: center;
+  padding: 10rpx;
 }
 
 .history-bill-list {

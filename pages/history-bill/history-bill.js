@@ -103,6 +103,14 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
 
+    var startDate = util.addDay(-7);
+
+    this.setData({
+      startDate: util.formatTime(startDate, "yyyy-MM-dd"),
+      endDate: util.formatTime(new Date(), "yyyy-MM-dd"),
+      today: util.formatTime(new Date(), "yyyy-MM-dd"),
+    });
+    this.getHistoryBillList();
   },
   onReady: function () {
    
@@ -111,12 +119,7 @@ Page({
   },
   onShow: function () {
     // 页面显示
-    this.setData({
-      startDate: util.formatTime(new Date(), "yyyy-MM-dd"),
-      endDate: util.formatTime(new Date(), "yyyy-MM-dd"),
-      today: util.formatTime(new Date(), "yyyy-MM-dd"),
-    });
-    this.getHistoryBillList();
+   
   },
   onHide: function () {
     // 页面隐藏
