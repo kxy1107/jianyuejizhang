@@ -3,19 +3,20 @@
 var app = getApp()
 Page({
   data: {
-    userInfo: {},
+      avatarUrl:null,
+      nickName:"",
   
   },
-  //事件处理函数
-  bindViewTap: function() {
-   
-  },
-  onLoad: function () {
 
+  onLoad: function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    this.setData({
+      avatarUrl: userInfo.avatarUrl,
+      nickName: userInfo.nickName,
+
+    });
   },
   onShow:function(){
-    this.setData({
-      userInfo: app.globalData.userInfo
-    });
+   
   }
 })

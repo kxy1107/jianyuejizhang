@@ -8,7 +8,7 @@ App({
       success: function (Res) {
         wx.getUserInfo({
           success: function (res) {
-            that.globalData.userInfo = res.userInfo;
+            wx.setStorageSync("userInfo", res.userInfo);
             let code = Res.code;
             let iv = res.iv;
             let encryptedData = res.encryptedData;
@@ -20,7 +20,7 @@ App({
             }
             util.HttpGet(url, data, function (res) {
               if (res.Code == 1) {
-                wx.setStorageSync(openID, res.OpenID);
+                wx.setStorageSync("openID", res.OpenID);
                 return typeof userInfoRes == "function" && userInfoRes(res.OpenID);
               }
             });
@@ -45,7 +45,6 @@ App({
   },
 
   globalData: {
-    userInfo: null,
      //address: "http://127.0.0.1:8012",
     address: "https://jianyuejizhang.cn",
 
