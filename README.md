@@ -3,6 +3,7 @@
 ![](https://github.com/kxy1107/jianyuejizhang/raw/master/readmeSrc/jyjzDemo3.png) 
 ![](https://github.com/kxy1107/jianyuejizhang/raw/master/readmeSrc/jyjzDemo2.png) 
 ![](https://github.com/kxy1107/jianyuejizhang/raw/master/readmeSrc/jyjzDemo1.png) 
+<img width="150" height="150" src="https://github.com/kxy1107/jianyuejizhang/raw/master/readmeSrc/jyjzDemo1.png"/>
 
 [服务部分（node.js后台）](https://github.com/kxy1107/BillServer) 
 
