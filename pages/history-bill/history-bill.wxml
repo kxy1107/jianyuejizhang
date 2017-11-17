@@ -1,6 +1,6 @@
 
 <!--pages/history-bill/history-bill.wxml-->
-<view class="ui-height-100">
+<view class="ui-flex-ver ui-height-100">
 
   <!--顶部查询时间选择-->
   <view class="date-select">
@@ -33,7 +33,8 @@
 
 
   <!--账单列表-->
-  <scroll-view scroll-y="true" class="ui-height-100" bindscrolltoupper="upper" bindscrolltolower="lower">
+  <view class='view-scroll'>
+  <scroll-view scroll-y="true" class="ui-height-100 " >
     <block wx:for="{{historyBillList}}">
       <view class="history-bill-list " bindtap="onHisterBillItemClick"  data-id="{{item.BillNo}}"  bindtouchstart="onTouchStart" bindtouchend = "onTouchEnd" >
         <view class="ui-flex-1">{{item.Date}}</view>
@@ -45,4 +46,5 @@
       </view>
     </block>
   </scroll-view>
+  </view>
 </view>

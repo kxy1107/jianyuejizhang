@@ -2,6 +2,9 @@
  * 发送网络请求
  */
 function HttpGet(url, parm, response) {
+  wx.showLoading({
+    title: '加载中',
+  });
   wx.request({
     url: url,
     data: parm,
@@ -9,9 +12,11 @@ function HttpGet(url, parm, response) {
       //'Content-Type': 'application/json'
     },
     success: function (res) {
+      wx.hideLoading();
       return typeof response == "function" && response(res.data)
     },
     fail: function (res) {
+      wx.hideLoading();
       return typeof response == "function" && response(false)
     }
   })
@@ -22,6 +27,9 @@ function HttpGet(url, parm, response) {
  * 发送网络请求
  */
 function HttpPost(url, parm, response) {
+  wx.showLoading({
+    title: '加载中',
+  });
   wx.request({
     url: url,
     data: this.json2Form(parm),
@@ -31,9 +39,11 @@ function HttpPost(url, parm, response) {
     },
     method: "POST",
     success: function (res) {
+      wx.hideLoading();
       return typeof response == "function" && response(res.data)
     },
     fail: function (res) {
+      wx.hideLoading();
       return typeof response == "function" && response(false)
     }
   })
